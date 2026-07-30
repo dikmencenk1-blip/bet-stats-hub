@@ -143,6 +143,8 @@ function DashboardPage() {
                   stroke="var(--color-success)"
                   strokeWidth={2.5}
                   fill="url(#pl)"
+                  isAnimationActive={false}
+
                 />
               </AreaChart>
             </ResponsiveContainer>
