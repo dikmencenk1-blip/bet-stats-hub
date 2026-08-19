@@ -77,3 +77,21 @@ export function betReturn(bet: Bet) {
   if (bet.status === "lost") return 0;
   return bet.stake * bet.odds;
 }
+
+export type TodaysMatch = {
+  id: string;
+  time: string;
+  league: string;
+  home: string;
+  away: string;
+  odds: { home: number; draw: number; away: number };
+};
+
+export const todaysMatches: TodaysMatch[] = [
+  { id: "m1", time: "19:00", league: "Premier League", home: "Man City", away: "Arsenal", odds: { home: 1.75, draw: 3.6, away: 4.2 } },
+  { id: "m2", time: "19:30", league: "La Liga", home: "Real Madrid", away: "Valencia", odds: { home: 1.55, draw: 4.1, away: 5.5 } },
+  { id: "m3", time: "20:00", league: "Serie A", home: "Inter", away: "Atalanta", odds: { home: 1.9, draw: 3.4, away: 3.9 } },
+  { id: "m4", time: "20:30", league: "Bundesliga", home: "Bayern", away: "Leverkusen", odds: { home: 1.65, draw: 4, away: 4.75 } },
+  { id: "m5", time: "21:00", league: "Ligue 1", home: "PSG", away: "Monaco", odds: { home: 1.7, draw: 3.8, away: 4.6 } },
+  { id: "m6", time: "21:45", league: "Champions League", home: "Barcelona", away: "Dortmund", odds: { home: 1.45, draw: 4.5, away: 6 } },
+];

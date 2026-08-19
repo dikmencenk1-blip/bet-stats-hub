@@ -16,8 +16,7 @@ import {
   YAxis,
 } from "recharts";
 import { AppShell } from "@/components/AppShell";
-import { StatusBadge } from "@/components/StatusBadge";
-import { cumulativeSeries, initialBets, money, stats } from "@/lib/betting";
+import { cumulativeSeries, initialBets, money, stats, todaysMatches } from "@/lib/betting";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -104,10 +103,10 @@ function DashboardPage() {
       </div>
 
       <div className="mt-4 grid gap-4 xl:grid-cols-[2fr_1fr]">
-        <section className="panel border-0 p-5">
+        <section className="panel border-0 p-5 h-[230px] flex flex-col">
           <h2 className="text-base font-semibold">Cumulative profit</h2>
           <p className="text-sm text-muted-foreground">Running P/L across settled coupons</p>
-          <div className="mt-4 h-[241px]">
+          <div className="mt-4 flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={series} margin={{ left: -18, right: 6, top: 8 }}>
                 <defs>
@@ -144,36 +143,35 @@ function DashboardPage() {
                   strokeWidth={2.5}
                   fill="url(#pl)"
                   isAnimationActive={false}
-
                 />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </section>
 
-        <section className="panel border-0 p-5">
+        <section className="panel border-0 p-5 h-[230px]">
           <h2 className="text-base font-semibold">Win / Loss / Void</h2>
           <p className="text-sm text-muted-foreground">Settled outcome distribution</p>
 
-          <p className="num mt-5 font-display text-4xl font-bold text-success">
+          <p className="num mt-3 font-display text-3xl font-bold text-success">
             {s.winRate.toFixed(0)}%
           </p>
           <p className="text-xs text-muted-foreground">Win rate</p>
 
-          <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-muted">
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-muted">
             <div
               className="h-full rounded-full bg-success"
               style={{ width: `${s.winRate}%` }}
             />
           </div>
 
-          <dl className="mt-5 grid grid-cols-3 gap-2 text-center">
+          <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
             {[
               { l: "Won", v: s.won, c: "text-success" },
               { l: "Lost", v: s.lost, c: "text-destructive" },
               { l: "Void", v: s.voided, c: "text-muted-foreground" },
             ].map((x) => (
-              <div key={x.l} className="rounded-xl border border-border bg-surface/60 py-3">
+              <div key={x.l} className="rounded-xl border border-border bg-surface/60 py-2">
                 <dt className="text-xs text-muted-foreground">{x.l}</dt>
                 <dd className={`num font-display text-xl font-bold ${x.c}`}>{x.v}</dd>
               </div>
@@ -182,21 +180,28 @@ function DashboardPage() {
         </section>
       </div>
 
-      <section className="panel mt-4 p-5">
-        <h2 className="text-base font-semibold">Recent coupons</h2>
+      <section className="panel border-0 mt-4 p-5">
+        <h2 className="text-base font-semibold">Günün Maçları</h2>
         <ul className="mt-3 divide-y divide-border">
-          {bets.slice(0, 6).map((b) => (
+          {todaysMatches.map((m) => (
             <li
-              key={b.id}
-              className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3"
+              key={m.id}
+              className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-3"
             >
+              <div className="text-center">
+                <p className="text-xs font-semibold text-muted-foreground">{m.time}</p>
+                <p className="text-[10px] uppercase tracking-wide text-muted-foreground">{m.league}</p>
+              </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold">{b.event}</p>
-                <p className="truncate text-xs text-muted-foreground">
-                  {b.selection} · {b.odds.toFixed(2)} · {money(b.stake)}
+                <p className="truncate text-sm font-semibold">
+                  {m.home} <span className="text-muted-foreground">vs</span> {m.away}
                 </p>
               </div>
-              <StatusBadge status={b.status} />
+              <div className="flex gap-2 text-xs">
+                <span className="rounded bg-surface px-2 py-1 font-medium text-success"><span className="opacity-60">1:</span>{m.odds.home.toFixed(2)}</span>
+                <span className="rounded bg-surface px-2 py-1 font-medium text-muted-foreground"><span className="opacity-60">X:</span>{m.odds.draw.toFixed(2)}</span>
+                <span className="rounded bg-surface px-2 py-1 font-medium text-destructive"><span className="opacity-60">2:</span>{m.odds.away.toFixed(2)}</span>
+              </div>
             </li>
           ))}
         </ul>
