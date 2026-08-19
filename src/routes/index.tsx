@@ -153,25 +153,25 @@ function DashboardPage() {
           <h2 className="text-base font-semibold">Win / Loss / Void</h2>
           <p className="text-sm text-muted-foreground">Settled outcome distribution</p>
 
-          <p className="num mt-5 font-display text-4xl font-bold text-success">
+          <p className="num mt-3 font-display text-3xl font-bold text-success">
             {s.winRate.toFixed(0)}%
           </p>
           <p className="text-xs text-muted-foreground">Win rate</p>
 
-          <div className="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-muted">
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-muted">
             <div
               className="h-full rounded-full bg-success"
               style={{ width: `${s.winRate}%` }}
             />
           </div>
 
-          <dl className="mt-5 grid grid-cols-3 gap-2 text-center">
+          <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
             {[
               { l: "Won", v: s.won, c: "text-success" },
               { l: "Lost", v: s.lost, c: "text-destructive" },
               { l: "Void", v: s.voided, c: "text-muted-foreground" },
             ].map((x) => (
-              <div key={x.l} className="rounded-xl border border-border bg-surface/60 py-3">
+              <div key={x.l} className="rounded-xl border border-border bg-surface/60 py-2">
                 <dt className="text-xs text-muted-foreground">{x.l}</dt>
                 <dd className={`num font-display text-xl font-bold ${x.c}`}>{x.v}</dd>
               </div>
