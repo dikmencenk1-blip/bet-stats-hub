@@ -198,9 +198,9 @@ function DashboardPage() {
                 </p>
               </div>
               <div className="flex gap-2 text-xs">
-                <span className="rounded bg-surface px-2 py-1 font-medium text-success">1 {m.odds.home.toFixed(2)}</span>
-                <span className="rounded bg-surface px-2 py-1 font-medium text-muted-foreground">X {m.odds.draw.toFixed(2)}</span>
-                <span className="rounded bg-surface px-2 py-1 font-medium text-destructive">2 {m.odds.away.toFixed(2)}</span>
+                <span className="rounded bg-surface px-2 py-1 font-medium text-success"><span className="opacity-60">1</span>·{m.odds.home.toFixed(2)}</span>
+                <span className="rounded bg-surface px-2 py-1 font-medium text-muted-foreground"><span className="opacity-60">X</span>·{m.odds.draw.toFixed(2)}</span>
+                <span className="rounded bg-surface px-2 py-1 font-medium text-destructive"><span className="opacity-60">2</span>·{m.odds.away.toFixed(2)}</span>
               </div>
             </li>
           ))}
