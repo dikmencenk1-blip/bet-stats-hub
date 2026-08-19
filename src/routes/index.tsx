@@ -16,8 +16,7 @@ import {
   YAxis,
 } from "recharts";
 import { AppShell } from "@/components/AppShell";
-import { StatusBadge } from "@/components/StatusBadge";
-import { cumulativeSeries, initialBets, money, stats } from "@/lib/betting";
+import { cumulativeSeries, initialBets, money, stats, todaysMatches } from "@/lib/betting";
 
 export const Route = createFileRoute("/")({
   head: () => ({
