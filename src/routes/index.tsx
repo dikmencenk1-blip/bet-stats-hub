@@ -54,7 +54,7 @@ function Kpi({
   const toneCls =
     tone === "up" ? "text-success" : tone === "down" ? "text-destructive" : "text-foreground";
   return (
-    <div className="panel p-5">
+    <div className="panel border-0 p-5">
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           {label}
@@ -104,10 +104,10 @@ function DashboardPage() {
       </div>
 
       <div className="mt-4 grid gap-4 xl:grid-cols-[2fr_1fr]">
-        <section className="panel p-5">
+        <section className="panel border-0 p-5">
           <h2 className="text-base font-semibold">Cumulative profit</h2>
           <p className="text-sm text-muted-foreground">Running P/L across settled coupons</p>
-          <div className="mt-4 h-64">
+          <div className="mt-4 h-[241px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={series} margin={{ left: -18, right: 6, top: 8 }}>
                 <defs>
@@ -151,7 +151,7 @@ function DashboardPage() {
           </div>
         </section>
 
-        <section className="panel p-5">
+        <section className="panel border-0 p-5">
           <h2 className="text-base font-semibold">Win / Loss / Void</h2>
           <p className="text-sm text-muted-foreground">Settled outcome distribution</p>
 
